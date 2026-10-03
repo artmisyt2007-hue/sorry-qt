@@ -1,0 +1,122 @@
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const buttons = document.querySelector(".buttons");
+const question = document.querySelector(".question");
+const message = document.querySelector(".message");
+const forgiven = document.getElementById("forgiven");
+
+let noAttempts = 0;
+
+/* Playful NO button */
+
+function moveNoButton() {
+  noAttempts++;
+
+  const card = document.querySelector(".card");
+  const cardRect = card.getBoundingClientRect();
+
+  const maxX = cardRect.width - noBtn.offsetWidth - 35;
+  const maxY = 120;
+
+  const x = Math.random() * maxX - maxX / 2;
+  const y = Math.random() * maxY - maxY / 2;
+
+  noBtn.style.position = "absolute";
+  noBtn.style.left = "50%";
+  noBtn.style.top = "50%";
+
+  noBtn.style.transform =
+    `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+
+  if (noAttempts >= 3) {
+    noBtn.textContent = "Are you sure? 🥺";
+  }
+
+  if (noAttempts >= 6) {
+    noBtn.textContent = "Please? 🌹";
+  }
+
+  if (noAttempts >= 9) {
+    noBtn.textContent = "Think again 😭";
+  }
+}
+
+/* Desktop */
+
+noBtn.addEventListener("mouseenter", moveNoButton);
+
+/* Mobile */
+
+noBtn.addEventListener("touchstart", function (event) {
+  event.preventDefault();
+  moveNoButton();
+});
+
+/* Just in case someone manages to click it */
+
+noBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+  moveNoButton();
+});
+
+/* YES */
+
+yesBtn.addEventListener("click", function () {
+
+  question.style.display = "none";
+  buttons.style.display = "none";
+  message.style.display = "none";
+
+  forgiven.classList.add("show");
+
+  createHearts();
+});
+
+/* Celebration hearts */
+
+function createHearts() {
+
+  for (let i = 0; i < 18; i++) {
+
+    const heart = document.createElement("div");
+
+    heart.innerHTML = "♥";
+
+    heart.style.position = "fixed";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.bottom = "-30px";
+    heart.style.fontSize = (15 + Math.random() * 25) + "px";
+    heart.style.color = "#ffd6df";
+    heart.style.pointerEvents = "none";
+    heart.style.zIndex = "999";
+
+    document.body.appendChild(heart);
+
+    const duration = 3 + Math.random() * 3;
+
+    heart.animate(
+      [
+        {
+          transform: "translateY(0) scale(0.5)",
+          opacity: 0
+        },
+        {
+          transform: "translateY(-50vh) scale(1)",
+          opacity: 1
+        },
+        {
+          transform: "translateY(-110vh) scale(1.2)",
+          opacity: 0
+        }
+      ],
+      {
+        duration: duration * 1000,
+        easing: "ease-out"
+      }
+    );
+
+    setTimeout(() => {
+      heart.remove();
+    }, duration * 1000);
+  }
+}
