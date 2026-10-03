@@ -1,0 +1,289 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+
+  font-family: "Poppins", sans-serif;
+
+  background:
+    radial-gradient(circle at top, #7b263f 0%, transparent 35%),
+    linear-gradient(135deg, #210b14, #3b101f, #210b14);
+
+  color: #fff;
+}
+
+/* Main card */
+
+.card {
+  position: relative;
+  width: min(90%, 550px);
+  padding: 55px 35px;
+
+  text-align: center;
+
+  background: rgba(75, 18, 39, 0.72);
+  border: 1px solid rgba(255, 205, 218, 0.18);
+  border-radius: 30px;
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.45),
+    inset 0 0 35px rgba(255, 150, 180, 0.05);
+
+  backdrop-filter: blur(18px);
+
+  animation: cardAppear 1s ease;
+}
+
+@keyframes cardAppear {
+  from {
+    opacity: 0;
+    transform: translateY(25px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.rose {
+  font-size: 58px;
+  margin-bottom: 10px;
+
+  animation: floatingRose 3s ease-in-out infinite;
+}
+
+@keyframes floatingRose {
+  0%, 100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+
+  50% {
+    transform: translateY(-8px) rotate(3deg);
+  }
+}
+
+h1 {
+  font-family: "Great Vibes", cursive;
+  font-size: clamp(42px, 8vw, 65px);
+  font-weight: 400;
+  color: #ffd5df;
+  margin-bottom: 15px;
+}
+
+.message {
+  font-size: 17px;
+  line-height: 1.8;
+  color: #f7dce4;
+}
+
+.question {
+  margin-top: 35px;
+  font-size: 22px;
+  font-weight: 500;
+  color: #fff;
+}
+
+/* Buttons */
+
+.buttons {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+
+  margin-top: 28px;
+  min-height: 55px;
+}
+
+button {
+  border: none;
+  padding: 13px 30px;
+
+  border-radius: 50px;
+
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+#yesBtn {
+  color: #541325;
+  background: #ffd6df;
+
+  box-shadow: 0 8px 25px rgba(255, 170, 190, 0.25);
+}
+
+#yesBtn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 12px 30px rgba(255, 170, 190, 0.4);
+}
+
+#noBtn {
+  position: relative;
+
+  color: #fff;
+  background: #681d38;
+
+  border: 1px solid rgba(255, 210, 220, 0.2);
+}
+
+/* Forgiven screen */
+
+.forgiven {
+  display: none;
+  margin-top: 25px;
+
+  animation: reveal 0.8s ease forwards;
+}
+
+.forgiven.show {
+  display: block;
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.celebration {
+  font-size: 48px;
+  margin-bottom: 5px;
+}
+
+.forgiven h2 {
+  font-family: "Great Vibes", cursive;
+  font-size: 45px;
+  font-weight: 400;
+  color: #ffd5df;
+}
+
+.forgiven p {
+  margin-top: 10px;
+  line-height: 1.7;
+  color: #f6dce4;
+}
+
+/* Digital gifts */
+
+.gifts {
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+
+  margin-top: 25px;
+}
+
+.gift {
+  width: 150px;
+  padding: 20px 12px;
+
+  border-radius: 20px;
+
+  background: rgba(255, 220, 230, 0.08);
+  border: 1px solid rgba(255, 220, 230, 0.12);
+
+  transition: transform 0.3s ease;
+}
+
+.gift:hover {
+  transform: translateY(-7px) rotate(-1deg);
+}
+
+.bouquet,
+.chocolate {
+  font-size: 60px;
+  margin-bottom: 10px;
+}
+
+.gift span {
+  font-size: 13px;
+  color: #f9dce5;
+}
+
+.final-message {
+  margin-top: 25px !important;
+  font-size: 14px;
+}
+
+/* Floating hearts */
+
+.hearts::before,
+.hearts::after {
+  content: "♥  ♥  ♥  ♥  ♥";
+  position: fixed;
+
+  width: 100%;
+  left: 0;
+
+  color: rgba(255, 185, 205, 0.12);
+  font-size: 25px;
+  letter-spacing: 35px;
+
+  animation: heartsFloat 12s linear infinite;
+  pointer-events: none;
+}
+
+.hearts::before {
+  bottom: -50px;
+}
+
+.hearts::after {
+  bottom: -120px;
+  animation-delay: 5s;
+  font-size: 18px;
+}
+
+@keyframes heartsFloat {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-115vh);
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 500px) {
+  .card {
+    padding: 40px 22px;
+  }
+
+  .gifts {
+    gap: 10px;
+  }
+
+  .gift {
+    width: 135px;
+  }
+
+  .buttons {
+    gap: 12px;
+  }
+
+  button {
+    padding: 12px 24px;
+  }
+}
